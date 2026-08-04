@@ -1,0 +1,20 @@
+services:
+  mysql:
+    image: mysql:8.4
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: medico_overseas
+      MYSQL_USER: medico_user
+      MYSQL_PASSWORD: MedicoDatabase@2026
+      MYSQL_ROOT_PASSWORD: MedicoDatabase@2026
+    ports:
+      - "3306:3306"
+    volumes:
+      - medico_mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+volumes:
+  medico_mysql_data:
