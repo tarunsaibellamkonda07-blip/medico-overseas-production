@@ -395,8 +395,11 @@ textarea {
   font-size: 1.1rem;
   opacity: 0.85;
 }
-.flag-large {
-  font-size: 4rem;
+.flag img {
+    width: 48px;
+    height: 36px;
+    object-fit: cover;
+    border-radius: 4px;
 }
 .content-grid {
   display: grid;
