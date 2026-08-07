@@ -403,6 +403,12 @@ textarea {
     background:#f5f5f5;
     border-radius:8px;
 }
+.flag_card img{
+     width: 48px;
+    height: 36px;
+    object-fit: cover;
+    border-radius: 4px;
+}
 .content-grid {
   display: grid;
   grid-template-columns: 1.45fr 0.55fr;
