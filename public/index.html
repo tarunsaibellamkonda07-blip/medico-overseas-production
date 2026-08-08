@@ -55,7 +55,7 @@
           <div class="reveal">
             <span class="eyebrow">MBBS Abroad Admissions 2026</span>
             <h1>
-              <span id="typing-normal" class="typing-normal"></span><span id="typing-highlight"></span><span class="typing-cursor">|</span>
+             <span id="typing-normal" class="typing-normal"></span><span id="typing-highlight"></span><span class="typing-cursor">|</span>
             </h1>
             <p>
               From university selection and documentation to visa, departure and
@@ -382,27 +382,63 @@
     let normalIndex = 0;
     let highlightIndex = 0;
 
-    function typeNormalText() {
+    const typingSpeed = 60;
+    const deletingSpeed = 35;
+    const pauseTime = 2000;
+
+    function typeText() {
+
+        // Type first part
         if (normalIndex < normalText.length) {
             normalElement.textContent += normalText.charAt(normalIndex);
             normalIndex++;
 
-            setTimeout(typeNormalText, 60);
-        } else {
-            typeHighlightText();
+            setTimeout(typeText, typingSpeed);
+            return;
         }
-    }
 
-    function typeHighlightText() {
+        // Type second part
         if (highlightIndex < highlightText.length) {
             highlightElement.textContent += highlightText.charAt(highlightIndex);
             highlightIndex++;
 
-            setTimeout(typeHighlightText, 60);
+            setTimeout(typeText, typingSpeed);
+            return;
         }
+
+        // Wait for 2 seconds after typing
+        setTimeout(deleteText, pauseTime);
     }
 
-    typeNormalText();
+    function deleteText() {
+
+        // Delete second part first
+        if (highlightIndex > 0) {
+            highlightIndex--;
+
+            highlightElement.textContent =
+                highlightText.substring(0, highlightIndex);
+
+            setTimeout(deleteText, deletingSpeed);
+            return;
+        }
+
+        // Then delete first part
+        if (normalIndex > 0) {
+            normalIndex--;
+
+            normalElement.textContent =
+                normalText.substring(0, normalIndex);
+
+            setTimeout(deleteText, deletingSpeed);
+            return;
+        }
+
+        // Start typing again
+        setTimeout(typeText, 500);
+    }
+
+    typeText();
     </script>
   </body>
 </html>
