@@ -55,7 +55,7 @@
           <div class="reveal">
             <span class="eyebrow">MBBS Abroad Admissions 2026</span>
             <h1>
-              <span id="typing-text"></span><span class="typing-cursor">|</span>
+              <span id="typing-normal" class="typing-normal"></span><span id="typing-highlight"></span><span class="typing-cursor">|</span>
             </h1>
             <p>
               From university selection and documentation to visa, departure and
@@ -373,20 +373,36 @@
       </a>
     <script src="script.js"></script>
     <script>
-    const text = "Your Trusted Path to an MBBS Degree Abroad";
-    const typingText = document.getElementById("typing-text");
+    const normalText = "Your Trusted Path to an ";
+    const highlightText = "MBBS Degree Abroad";
 
-    let index = 0;
+    const normalElement = document.getElementById("typing-normal");
+    const highlightElement = document.getElementById("typing-highlight");
 
-    function typeText() {
-        if (index < text.length) {
-            typingText.textContent += text.charAt(index);
-            index++;
-            setTimeout(typeText, 60);
+    let normalIndex = 0;
+    let highlightIndex = 0;
+
+    function typeNormalText() {
+        if (normalIndex < normalText.length) {
+            normalElement.textContent += normalText.charAt(normalIndex);
+            normalIndex++;
+
+            setTimeout(typeNormalText, 60);
+        } else {
+            typeHighlightText();
         }
     }
 
-    typeText();
+    function typeHighlightText() {
+        if (highlightIndex < highlightText.length) {
+            highlightElement.textContent += highlightText.charAt(highlightIndex);
+            highlightIndex++;
+
+            setTimeout(typeHighlightText, 60);
+        }
+    }
+
+    typeNormalText();
     </script>
   </body>
 </html>
