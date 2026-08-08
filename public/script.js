@@ -33,3 +33,39 @@ document.querySelectorAll('form[data-api-form="true"]').forEach(form=>form.addEv
 const search=document.querySelector('#blogSearch'),cat=document.querySelector('#blogCategory');
 function filterBlogs(){if(!search||!cat)return;const q=search.value.toLowerCase(),c=cat.value;document.querySelectorAll('#blogGrid article').forEach(a=>a.classList.toggle('hidden',!(a.innerText.toLowerCase().includes(q)&&(c==='all'||a.dataset.cat===c))))}
 if(search){search.addEventListener('input',filterBlogs);cat.addEventListener('change',filterBlogs)}
+// Phone number validation
+const phoneInput = document.querySelector('input[name="phone"]');
+
+if (phoneInput) {
+    phoneInput.addEventListener("input", function () {
+
+        // Allow numbers only
+        this.value = this.value.replace(/\D/g, "");
+
+        // Limit to 10 digits
+        this.value = this.value.slice(0, 10);
+
+        // Clear previous validation
+        this.setCustomValidity("");
+
+        // Check only after 10 digits
+        if (this.value.length === 10) {
+
+            const digitCount = {};
+
+            // Count each digit
+            for (const digit of this.value) {
+                digitCount[digit] = (digitCount[digit] || 0) + 1;
+            }
+
+            // Check whether any digit appears more than 5 times
+            const invalid = Object.values(digitCount).some(
+                count => count > 5
+            );
+
+            if (invalid) {
+                this.setCustomValidity("Invalid number");
+            }
+        }
+    });
+}
