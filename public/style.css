@@ -637,3 +637,18 @@ th {
   opacity: 0.7;
   cursor: wait;
 }
+.typing-cursor {
+    display: inline-block;
+    margin-left: 3px;
+    animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+    0%, 50% {
+        opacity: 1;
+    }
+
+    51%, 100% {
+        opacity: 0;
+    }
+}

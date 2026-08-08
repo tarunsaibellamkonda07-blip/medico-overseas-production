@@ -54,7 +54,9 @@
         <div class="container hero-grid">
           <div class="reveal">
             <span class="eyebrow">MBBS Abroad Admissions 2026</span>
-            <h1>Your Trusted Path to an <span>MBBS Degree Abroad</span></h1>
+            <h1>
+              <span id="typing-text"></span><span class="typing-cursor">|</span>
+            </h1>
             <p>
               From university selection and documentation to visa, departure and
               licensing-exam guidance, Medico Overseas supports your complete
@@ -370,5 +372,21 @@
       <i class="fab fa-whatsapp"></i>
       </a>
     <script src="script.js"></script>
+    <script>
+    const text = "Your Trusted Path to an MBBS Degree Abroad";
+    const typingText = document.getElementById("typing-text");
+
+    let index = 0;
+
+    function typeText() {
+        if (index < text.length) {
+            typingText.textContent += text.charAt(index);
+            index++;
+            setTimeout(typeText, 60);
+        }
+    }
+
+    typeText();
+    </script>
   </body>
 </html>
