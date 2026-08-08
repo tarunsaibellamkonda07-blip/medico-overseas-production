@@ -60,7 +60,7 @@ if (phoneInput) {
 
             // Check whether any digit appears more than 5 times
             const invalid = Object.values(digitCount).some(
-                count => count > 5
+                count => count > 4
             );
 
             if (invalid) {
