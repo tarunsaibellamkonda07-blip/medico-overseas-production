@@ -676,63 +676,24 @@ th {
         opacity: 0;
     }
 }
-/* =========================================
-   COUNTRY HERO BACKGROUND VIDEO
-   ========================================= */
-
-.country-hero {
-    position: relative;
-    overflow: hidden;
-    isolation: isolate;
-    min-height: 500px;
-    display: flex;
-    align-items: center;
-}
-
 .country-bg-video {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    z-index: -3;
+    z-index: 0;
 }
 
 .country-video-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-        90deg,
-        rgba(0, 20, 60, 0.78),
-        rgba(0, 20, 60, 0.45),
-        rgba(0, 20, 60, 0.25)
-    );
-    z-index: -2;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 1;
+    pointer-events: none;
 }
 
 .country-hero .container {
     position: relative;
-    z-index: 1;
-}
-
-.country-hero h1,
-.country-hero p,
-.country-hero .eyebrow {
-    color: #ffffff;
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-
-    .country-hero {
-        min-height: 550px;
-    }
-
-    .country-bg-video {
-        object-position: center;
-    }
-
-    .country-video-overlay {
-        background: rgba(0, 20, 60, 0.65);
-    }
+    z-index: 2;
 }
