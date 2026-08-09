@@ -722,3 +722,17 @@ th {
     position: relative;
     z-index: 1;
 }
+/* FIX: Free Counselling button text on hover */
+.btn:hover {
+    color: #fff !important;
+    background: var(--coral) !important;
+    transform: translateY(-2px);
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.btn:hover *,
+.btn:hover a,
+.btn:hover span {
+    color: #fff !important;
+}
