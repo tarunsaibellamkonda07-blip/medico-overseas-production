@@ -23,5 +23,18 @@
     "nodemailer": "^7.0.5",
     "sequelize": "^6.37.7",
     "slugify": "^1.6.6"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tarunsaibellamkonda07-blip/medico-overseas-production.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/tarunsaibellamkonda07-blip/medico-overseas-production/issues"
+  },
+  "homepage": "https://github.com/tarunsaibellamkonda07-blip/medico-overseas-production#readme"
 }

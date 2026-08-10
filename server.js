@@ -149,4 +149,205 @@ async function start() {
   await sequelize.sync();
   app.listen(PORT, () => console.log(`Medico Overseas running at http://localhost:${PORT}`));
 }
-start().catch(error => { console.error('Startup failed:', error.message); process.exit(1); });
+/* =========================================
+   MEDICO AI CHAT
+========================================= */
+
+const aiChatButton = document.getElementById("ai-chat-button");
+const aiChatWindow = document.getElementById("ai-chat-window");
+const aiChatClose = document.getElementById("ai-chat-close");
+const aiChatInput = document.getElementById("ai-chat-input");
+const aiSendButton = document.getElementById("ai-send-button");
+const aiChatMessages = document.getElementById("ai-chat-messages");
+
+
+/* Open Chat */
+
+aiChatButton.addEventListener("click", () => {
+  aiChatWindow.classList.add("active");
+  aiChatInput.focus();
+});
+
+
+/* Close Chat */
+
+aiChatClose.addEventListener("click", () => {
+  aiChatWindow.classList.remove("active");
+});
+
+
+/* Send on Enter */
+
+aiChatInput.addEventListener("keydown", (event) => {
+
+  if (event.key === "Enter") {
+    sendAIMessage();
+  }
+
+});
+
+
+/* Send Button */
+
+aiSendButton.addEventListener("click", sendAIMessage);
+
+
+/* Send Message */
+
+async function sendAIMessage() {
+
+  const message = aiChatInput.value.trim();
+
+  if (!message) {
+    return;
+  }
+
+
+  /* Display user message */
+
+  const userMessage = document.createElement("div");
+
+  userMessage.className = "user-message";
+
+  userMessage.innerHTML = `
+    <div class="user-bubble">
+      ${escapeHTML(message)}
+    </div>
+  `;
+
+  aiChatMessages.appendChild(userMessage);
+
+
+  /* Clear input */
+
+  aiChatInput.value = "";
+
+
+  /* Scroll */
+
+  aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+
+
+  /* Loading */
+
+  const loadingMessage = document.createElement("div");
+
+  loadingMessage.className = "ai-message";
+
+  loadingMessage.innerHTML = `
+    <div class="ai-avatar">
+      <i class="fas fa-robot"></i>
+    </div>
+
+    <div class="ai-bubble ai-loading">
+      Medico AI is thinking...
+    </div>
+  `;
+
+  aiChatMessages.appendChild(loadingMessage);
+
+  aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+
+
+  try {
+
+    const response = await fetch(
+      "http://localhost:5000/api/chat",
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+          message: message
+        })
+      }
+    );
+
+
+    const data = await response.json();
+
+
+    /* Remove loading */
+
+    loadingMessage.remove();
+
+
+    /* AI response */
+
+    const aiMessage = document.createElement("div");
+
+    aiMessage.className = "ai-message";
+
+    aiMessage.innerHTML = `
+      <div class="ai-avatar">
+        <i class="fas fa-robot"></i>
+      </div>
+
+      <div class="ai-bubble">
+        ${formatAIResponse(data.reply || data.error)}
+      </div>
+    `;
+
+    aiChatMessages.appendChild(aiMessage);
+
+
+  } catch (error) {
+
+    loadingMessage.remove();
+
+    const errorMessage = document.createElement("div");
+
+    errorMessage.className = "ai-message";
+
+    errorMessage.innerHTML = `
+      <div class="ai-avatar">
+        <i class="fas fa-robot"></i>
+      </div>
+
+      <div class="ai-bubble">
+        ❌ Unable to connect to Medico AI server.
+        <br><br>
+        Please make sure the Node.js server is running.
+      </div>
+    `;
+
+    aiChatMessages.appendChild(errorMessage);
+
+    console.error("AI connection error:", error);
+
+  }
+
+
+  aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+
+}
+
+
+/* Prevent HTML injection */
+
+function escapeHTML(text) {
+
+  const div = document.createElement("div");
+
+  div.textContent = text;
+
+  return div.innerHTML;
+
+}
+
+
+/* Basic response formatting */
+
+function formatAIResponse(text) {
+
+  if (!text) {
+    return "Sorry, I couldn't generate a response.";
+  }
+
+  return escapeHTML(text)
+    .replace(/\n/g, "<br>");
+
+}
