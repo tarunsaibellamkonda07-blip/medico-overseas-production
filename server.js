@@ -153,14 +153,6 @@ async function start() {
    MEDICO AI CHAT
 ========================================= */
 
-const aiChatButton = document.getElementById("ai-chat-button");
-const aiChatWindow = document.getElementById("ai-chat-window");
-const aiChatClose = document.getElementById("ai-chat-close");
-const aiChatInput = document.getElementById("ai-chat-input");
-const aiSendButton = document.getElementById("ai-send-button");
-const aiChatMessages = document.getElementById("ai-chat-messages");
-
-
 /* Open Chat */
 
 aiChatButton.addEventListener("click", () => {
