@@ -252,7 +252,7 @@ async function sendAIMessage() {
   try {
 
     const response = await fetch(
-      "http://localhost:5000/api/chat",
+      "https://medico-overseas-production.up.railway.app/api/chat",
       {
         method: "POST",
 
