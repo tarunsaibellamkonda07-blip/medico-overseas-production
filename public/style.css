@@ -947,3 +947,104 @@ th {
     bottom: 80px;
   }
 }
+/* =========================================
+   HOME HERO TEXT VISIBILITY FIX
+========================================= */
+
+/* Darken the background slightly for better contrast */
+.hero::before {
+    background-image:
+        linear-gradient(
+            rgba(0, 20, 55, 0.58),
+            rgba(0, 20, 55, 0.58)
+        ),
+        url("https://res.cloudinary.com/dqjwswxxg/image/upload/v1786427568/BG2_pv5q2j.png");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    filter: blur(2px);
+    transform: scale(1.05);
+}
+
+/* Main heading - WHITE for visibility */
+.hero h1 {
+    color: #ffffff !important;
+    text-shadow: 0 3px 12px rgba(0, 0, 0, 0.35);
+}
+
+/* Highlighted words - keep coral */
+.hero h1 span,
+.hero h1 #typing-highlight {
+    color: #ff674b !important;
+    text-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+}
+
+/* If typing text uses this class */
+.hero h1 .typing-normal {
+    color: #ffffff !important;
+}
+
+/* Hero description */
+.hero p {
+    color: #f1f5fa !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+}
+
+/* Small heading above main heading */
+.hero .eyebrow {
+    color: #ff8068 !important;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Trust points at bottom of hero */
+.hero .trust-mini {
+    color: #ffffff !important;
+    text-shadow: 0 2px 7px rgba(0, 0, 0, 0.45);
+}
+
+.hero .trust-mini span {
+    color: #ffffff !important;
+}
+
+/* Primary button */
+.hero .btn {
+    color: #ffffff !important;
+    background: var(--coral) !important;
+}
+
+/* Outline button */
+.hero .btn-outline {
+    color: #ffffff !important;
+    border-color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Outline button hover */
+.hero .btn-outline:hover {
+    color: var(--navy) !important;
+    background: #ffffff !important;
+    border-color: #ffffff !important;
+}
+
+/* Improve readability on smaller screens */
+@media (max-width: 600px) {
+    .hero::before {
+        background-image:
+            linear-gradient(
+                rgba(0, 20, 55, 0.64),
+                rgba(0, 20, 55, 0.64)
+            ),
+            url("https://res.cloudinary.com/dqjwswxxg/image/upload/v1786427568/BG2_pv5q2j.png");
+    }
+
+    .hero h1 {
+        color: #ffffff !important;
+        text-shadow: 0 3px 10px rgba(0, 0, 0, 0.45);
+    }
+
+    .hero p {
+        color: #ffffff !important;
+    }
+}
