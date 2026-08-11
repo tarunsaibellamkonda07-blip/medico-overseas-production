@@ -130,9 +130,10 @@ img {
   color: var(--navy);
 }
 .hero {
-  padding: 78px 0;
-  background: linear-gradient(135deg, #fff 0%, #fff7f2 50%, #eef3fb 100%);
-  overflow: hidden;
+    background-image: url("https://res.cloudinary.com/dqjwswxxg/image/upload/v1786425228/BG_bcpjsr.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 .hero-grid {
   display: grid;
