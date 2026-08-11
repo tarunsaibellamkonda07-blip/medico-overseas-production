@@ -130,13 +130,35 @@ img {
   color: var(--navy);
 }
 .hero {
-    position: relative;
-    background-image:
-        linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
-        url("https://res.cloudinary.com/dqjwswxxg/image/upload/v1786425228/BG_bcpjsr.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+  position: relative;
+  min-height: 680px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Blurred background */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: -20px;
+
+  background-image:
+    linear-gradient(
+      rgba(0, 20, 55, 0.45),
+      rgba(0, 20, 55, 0.45)
+    ),
+    url("https://res.cloudinary.com/dqjwswxxg/image/upload/v1786425228/BG_bcpjsr.png");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  filter: blur(7px);
+  transform: scale(1.05);
+
+  z-index: -1;
 }
 .hero-grid {
   display: grid;
