@@ -155,7 +155,7 @@ img {
   background-position: center;
   background-repeat: no-repeat;
 
-  filter: blur(7px);
+  filter: blur(4px);
   transform: scale(1.05);
 
   z-index: -1;
