@@ -130,7 +130,10 @@ img {
   color: var(--navy);
 }
 .hero {
-    background-image: url("https://res.cloudinary.com/dqjwswxxg/image/upload/v1786425228/BG_bcpjsr.png");
+    position: relative;
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
+        url("https://res.cloudinary.com/dqjwswxxg/image/upload/v1786425228/BG_bcpjsr.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
