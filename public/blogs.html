@@ -145,6 +145,229 @@
       > <i class="fab fa-whatsapp"></i></a
     >
     <script src="script.js"></script>
+    <script>
+    const normalText = "Your Trusted Path to an ";
+    const highlightText = "MBBS Degree Abroad";
+
+    const normalElement = document.getElementById("typing-normal");
+    const highlightElement = document.getElementById("typing-highlight");
+
+    let normalIndex = 0;
+    let highlightIndex = 0;
+
+    const typingSpeed = 60;
+    const deletingSpeed = 35;
+    const pauseTime = 5000;
+
+    function typeText() {
+
+        // Type first part
+        if (normalIndex < normalText.length) {
+            normalElement.textContent += normalText.charAt(normalIndex);
+            normalIndex++;
+
+            setTimeout(typeText, typingSpeed);
+            return;
+        }
+
+        // Type second part
+        if (highlightIndex < highlightText.length) {
+            highlightElement.textContent += highlightText.charAt(highlightIndex);
+            highlightIndex++;
+
+            setTimeout(typeText, typingSpeed);
+            return;
+        }
+
+        // Wait for 2 seconds after typing
+        setTimeout(deleteText, pauseTime);
+    }
+
+    function deleteText() {
+
+        // Delete second part first
+        if (highlightIndex > 0) {
+            highlightIndex--;
+
+            highlightElement.textContent =
+                highlightText.substring(0, highlightIndex);
+
+            setTimeout(deleteText, deletingSpeed);
+            return;
+        }
+
+        // Then delete first part
+        if (normalIndex > 0) {
+            normalIndex--;
+
+            normalElement.textContent =
+                normalText.substring(0, normalIndex);
+
+            setTimeout(deleteText, deletingSpeed);
+            return;
+        }
+
+        // Start typing again
+        setTimeout(typeText, 500);
+    }
+
+    typeText();
+    </script>
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const aiChatButton = document.getElementById("ai-chat-button");
+    const aiChatWindow = document.getElementById("ai-chat-window");
+    const aiChatClose = document.getElementById("ai-chat-close");
+    const aiChatInput = document.getElementById("ai-chat-input");
+    const aiSendButton = document.getElementById("ai-send-button");
+    const aiChatMessages = document.getElementById("ai-chat-messages");
+
+    if (!aiChatButton || !aiChatWindow || !aiChatClose ||
+        !aiChatInput || !aiSendButton || !aiChatMessages) {
+
+        console.error("Medico AI: Required HTML elements are missing.");
+        return;
+    }
+
+    // OPEN CHAT
+    aiChatButton.addEventListener("click", function () {
+        aiChatWindow.classList.add("active");
+        aiChatInput.focus();
+    });
+
+    // CLOSE CHAT
+    aiChatClose.addEventListener("click", function () {
+        aiChatWindow.classList.remove("active");
+    });
+
+    // SEND BUTTON
+    aiSendButton.addEventListener("click", sendAIMessage);
+
+    // ENTER KEY
+    aiChatInput.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            sendAIMessage();
+        }
+    });
+
+    async function sendAIMessage() {
+
+        const message = aiChatInput.value.trim();
+
+        if (!message) return;
+
+        // USER MESSAGE
+        const userMessage = document.createElement("div");
+        userMessage.className = "user-message";
+
+        userMessage.innerHTML = `
+            <div class="user-bubble">
+                ${escapeHTML(message)}
+            </div>
+        `;
+
+        aiChatMessages.appendChild(userMessage);
+
+        aiChatInput.value = "";
+
+        // LOADING MESSAGE
+        const loadingMessage = document.createElement("div");
+        loadingMessage.className = "ai-message";
+
+        loadingMessage.innerHTML = `
+            <div class="ai-avatar">
+                <i class="fas fa-robot"></i>
+            </div>
+
+            <div class="ai-bubble">
+                Medico AI is thinking...
+            </div>
+        `;
+
+        aiChatMessages.appendChild(loadingMessage);
+
+        aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+
+        try {
+
+            const response = await fetch("/api/chat", {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    message: message
+                })
+            });
+
+            const data = await response.json();
+
+            loadingMessage.remove();
+
+            const aiMessage = document.createElement("div");
+            aiMessage.className = "ai-message";
+
+            aiMessage.innerHTML = `
+                <div class="ai-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+
+                <div class="ai-bubble">
+                    ${formatAIResponse(data.reply || data.error)}
+                </div>
+            `;
+
+            aiChatMessages.appendChild(aiMessage);
+
+        } catch (error) {
+
+            console.error("AI Error:", error);
+
+            loadingMessage.remove();
+
+            const errorMessage = document.createElement("div");
+            errorMessage.className = "ai-message";
+
+            errorMessage.innerHTML = `
+                <div class="ai-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+
+                <div class="ai-bubble">
+                    ❌ Unable to connect to Medico AI server.
+                </div>
+            `;
+
+            aiChatMessages.appendChild(errorMessage);
+        }
+
+        aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+    }
+
+    function escapeHTML(text) {
+
+        const div = document.createElement("div");
+
+        div.textContent = text;
+
+        return div.innerHTML;
+    }
+
+    function formatAIResponse(text) {
+
+        if (!text) {
+            return "Sorry, I couldn't generate a response.";
+        }
+
+        return escapeHTML(text).replace(/\n/g, "<br>");
+    }
+
+});
+</script>
     <button id="ai-chat-button" class="ai-chat-button" aria-label="Open AI Assistant">
   <i class="fas fa-robot"></i>
 </button>
