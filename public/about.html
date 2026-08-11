@@ -166,5 +166,54 @@
       ><i class="fab fa-whatsapp"></i></a
     >
     <script src="script.js"></script>
+    <button id="ai-chat-button" class="ai-chat-button" aria-label="Open AI Assistant">
+  <i class="fas fa-robot"></i>
+</button>
+
+<!-- AI Chat Window -->
+<div id="ai-chat-window" class="ai-chat-window">
+
+  <div class="ai-chat-header">
+    <div>
+      <strong>Medico AI Assistant</strong>
+      <small>Online • Ask me anything</small>
+    </div>
+
+    <button id="ai-chat-close" aria-label="Close chat">
+      ×
+    </button>
+  </div>
+
+  <div id="ai-chat-messages" class="ai-chat-messages">
+
+    <div class="ai-message">
+      <div class="ai-avatar">
+        <i class="fas fa-robot"></i>
+      </div>
+
+      <div class="ai-bubble">
+        Hello! 👋<br>
+        I'm the Medico Overseas AI Assistant.<br><br>
+        I can help you with MBBS abroad, destinations, admission and counselling.
+      </div>
+    </div>
+
+  </div>
+
+  <div class="ai-chat-input-area">
+
+      <input
+      type="text"
+      id="ai-chat-input"
+      placeholder="Type your question..."
+      autocomplete="off"
+       />
+
+        <button id="ai-send-button" aria-label="Send message">
+         <i class="fas fa-paper-plane"></i>
+        </button>
+
+      </div>
+
   </body>
 </html>
